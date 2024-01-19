@@ -153,7 +153,7 @@ export type AllProductsQueryVariables = Exact<{
 }>;
 
 
-export type AllProductsQuery = { __typename?: 'Query', allProducts?: Array<{ __typename?: 'Product', id: string, name: string } | null> | null };
+export type AllProductsQuery = { __typename?: 'Query', allProducts?: Array<{ __typename?: 'Product', id: string, name: string, description: string, image_url: string, category: string, price_in_cents: number, sales: number } | null> | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -175,6 +175,11 @@ export const AllProductsDocument = new TypedDocumentString(`
   allProducts(perPage: 10, page: $page) {
     id
     name
+    description
+    image_url
+    category
+    price_in_cents
+    sales
   }
 }
     `) as unknown as TypedDocumentString<AllProductsQuery, AllProductsQueryVariables>;

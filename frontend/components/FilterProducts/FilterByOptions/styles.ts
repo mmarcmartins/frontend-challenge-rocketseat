@@ -36,6 +36,7 @@ export const ListContainer = styled.div`
   width: 176px;
   top: 30px;
   right: 0;
+  z-index: 2;
   background-color: #FFF;
   color: #737390;
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.10);

@@ -21,8 +21,10 @@ export default function RootLayout({
     <html lang="pt-br">
       <body style={{margin: 0, backgroundColor: '#F0F0F5'}} suppressHydrationWarning={true} className={`${SairaStencilOne.variable} ${SairaFont.className}`}>
         <Providers>
+          <StyledComponentsRegistry>
           <Header/>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          {children}
+          </StyledComponentsRegistry>
         </Providers>
       </body>
     </html>

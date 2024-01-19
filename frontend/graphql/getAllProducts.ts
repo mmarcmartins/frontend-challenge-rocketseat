@@ -7,6 +7,11 @@ export default graphql(`
     allProducts(perPage: 10, page: $page){
       id
       name
+      description
+      image_url
+      category
+      price_in_cents
+      sales
     }
   }
 `);
