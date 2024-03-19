@@ -6,12 +6,14 @@ export const SmallProductStyle = styled.li`
   background-color: #FFF;
   border-radius: 8px;
   display: flex;
-  flex: 0 1 calc(25% - 32px);
+  flex: 0 1 calc(25% - 18px);
   position: relative;
-  flex-direction:column;
+  min-width: 150px;
+  flex-direction: column;
 
   img{
     width: 100%;
+    height: auto;
     border-radius: 8px 8px 0 0;
   }
   .description {
@@ -28,6 +30,9 @@ export const SmallProductStyle = styled.li`
     font-size: 16px;
     line-height: 24px;
     color: #41414D;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
   }
 
   .price{

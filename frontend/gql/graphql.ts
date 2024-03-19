@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -155,31 +155,5 @@ export type AllProductsQueryVariables = Exact<{
 
 export type AllProductsQuery = { __typename?: 'Query', allProducts?: Array<{ __typename?: 'Product', id: string, name: string, description: string, image_url: string, category: string, price_in_cents: number, sales: number } | null> | null };
 
-export class TypedDocumentString<TResult, TVariables>
-  extends String
-  implements DocumentTypeDecoration<TResult, TVariables>
-{
-  __apiType?: DocumentTypeDecoration<TResult, TVariables>['__apiType'];
 
-  constructor(private value: string, public __meta__?: Record<string, any>) {
-    super(value);
-  }
-
-  toString(): string & DocumentTypeDecoration<TResult, TVariables> {
-    return this.value;
-  }
-}
-
-export const AllProductsDocument = new TypedDocumentString(`
-    query allProducts($page: Int!) {
-  allProducts(perPage: 10, page: $page) {
-    id
-    name
-    description
-    image_url
-    category
-    price_in_cents
-    sales
-  }
-}
-    `) as unknown as TypedDocumentString<AllProductsQuery, AllProductsQueryVariables>;
+export const AllProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"allProducts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allProducts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"perPage"},"value":{"kind":"IntValue","value":"10"}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image_url"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"price_in_cents"}},{"kind":"Field","name":{"kind":"Name","value":"sales"}}]}}]}}]} as unknown as DocumentNode<AllProductsQuery, AllProductsQueryVariables>;
