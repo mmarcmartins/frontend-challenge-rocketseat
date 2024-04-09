@@ -1,14 +1,14 @@
 'use-client'
 import styled from 'styled-components';
 
-export const PageContainer = styled.a`
+export const PageContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
   margin-top: 32px;
   gap: 2px;
 `;
 
-export const PageNumber = styled.button`
+export const PageNumber = styled.a<{$active?: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,8 +21,15 @@ export const PageNumber = styled.button`
   border-radius: 8px;
   font-weight: 500;
   font-size: 16px;
-  
+  text-decoration: none;
   transition: color .2s ease-in-out, border-color .2s ease-in-out;
+
+  ${({$active}) => $active && `
+    border-color: #FFA585;
+    color: #FFA585;
+    cursor: pointer;
+  `}
+  
   &.active, &:hover {
     border-color: #FFA585;
     color: #FFA585;

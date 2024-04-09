@@ -1,27 +1,41 @@
 
-import { dehydrate, Hydrate } from '@tanstack/react-query'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { ListProducts } from '.';
-import getQueryClient from '@/utils/getQueryClient';
 import getAllProducts from '@/queries/getAllProducts';
 import { GraphQLClient } from '@/client/Graphql';
+import getQueryClient from '@/utils/getQueryClient';
+import { propsToQuery } from '@/utils/mountParamsToQuery';
 
-export default async function HydratedProducts() {
+type HydratedProductsProps = {
+  currentPage:number;
+  currentOrder?: string;
+  currentField?: string;
+  currentCategory?: string;
+}
 
+export default async function HydratedProducts({currentPage, currentOrder, currentField}: HydratedProductsProps) {
   const queryClient = getQueryClient();
+  const params = propsToQuery(
+    {
+      page: currentPage,
+      category: currentField,
+      field: currentField,
+      sort: currentOrder
+    }
+  );
   await queryClient.prefetchQuery({
     queryKey: ['products'],
     queryFn: async () =>
     GraphQLClient.request(        
-        getAllProducts,
-        // variables are type-checked too!
-        { page: 1 },
+        getAllProducts,        
+        params,
       ),
   })  
-  const dehydratedState = dehydrate(queryClient)
-
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  const dehydratedState = dehydrate(queryClient); 
   return (
-    <Hydrate state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>       
       <ListProducts/>
-    </Hydrate>
+    </HydrationBoundary>
   )
 }

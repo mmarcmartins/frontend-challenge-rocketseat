@@ -1,23 +1,34 @@
-import { useRef } from "react";
+'use client';
+
+import { usePathname, useSearchParams } from "next/navigation";
 import { ListContainer } from "./styles";
-import { useClickOutside } from "@/hooks/useClickOutside";
 
 
 export const Menu = () => {
+  const searchParams = useSearchParams();  
+  const pathname = usePathname();
+
+  const createPageURLFieldOrder = (field: string, sort: 'asc' | 'desc') => {    
+    const params = new URLSearchParams(searchParams);
+    params.set('sort', sort);
+    params.set('field', field);
+    return `${pathname}?${params.toString()}`;
+  };
+
   return(
     <ListContainer>
       <ul>
         <li>
-          <a href="#news">Novidades</a>                                    
+          <a href={createPageURLFieldOrder('created_at', 'asc')}>Novidades</a>                                    
         </li>
         <li>
-          <a href="#asc">Preço: Maior - menor</a>
+          <a href={createPageURLFieldOrder('price_in_cents','desc')}>Preço: Maior - menor</a>
         </li>
         <li>
-          <a href="#desc">Preço: Menor - maior</a>
+          <a href={createPageURLFieldOrder('price_in_cents','asc')}>Preço: Menor - maior</a>
         </li>
         <li>
-          <a href="#sold">Mais vendidos</a>
+          <a href={createPageURLFieldOrder('sales', 'asc')}>Mais vendidos</a>
         </li>
       </ul>
     </ListContainer>
