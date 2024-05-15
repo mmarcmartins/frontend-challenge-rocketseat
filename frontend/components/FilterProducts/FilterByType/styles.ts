@@ -1,15 +1,22 @@
 'use client'
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const HyperLink = styled.a`
+const custom = css`
+  font-weight: 600;
+  &:after{
+    width: 100%;
+  }
+`;
+export const HyperLink = styled.a<{$active?: boolean}>`
   text-decoration: none;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
   text-transform: uppercase;
   color: #41414D;
-  
+  border-bottom: 2px solid transparent;
+  ${({$active}) => $active && ``}
   position: relative;
   padding-bottom: 4px;
   
@@ -25,12 +32,10 @@ export const HyperLink = styled.a`
     margin: auto;
     transition: width .2s ease-in-out;
   }
-
+  ${({$active}) => $active && custom};
+  
   &:hover{
-    font-weight: 600;
-    &:after{
-      width: 100%;
-    }
+    ${custom}
   }
 
   &:not(:last-child) {
