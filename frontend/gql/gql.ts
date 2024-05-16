@@ -14,7 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query allProducts($page: Int!, $sortOrder:String = \"asc\", $sortField: String = \"created_at\", $filter: ProductFilter){\n    allProducts(perPage: 10, page: $page, sortOrder: $sortOrder, sortField: $sortField, filter: $filter){\n      id\n      name\n      description\n      image_url\n      category\n      price_in_cents\n      sales\n    }\n  }\n": types.AllProductsDocument,
-    "\n  query Product($id: ID!){\n    Product(id: $id){\n        name\n        category\n        description\n        price_in_cents\n        image_url\n    }\n  }\n": types.ProductDocument,
+    "\n  query Product($id: ID!){\n    Product(id: $id){\n        id\n        name\n        category\n        description\n        price_in_cents\n        image_url\n        sales\n    }\n  }\n": types.ProductDocument,
 };
 
 /**
@@ -38,7 +38,7 @@ export function graphql(source: "\n  query allProducts($page: Int!, $sortOrder:S
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query Product($id: ID!){\n    Product(id: $id){\n        name\n        category\n        description\n        price_in_cents\n        image_url\n    }\n  }\n"): (typeof documents)["\n  query Product($id: ID!){\n    Product(id: $id){\n        name\n        category\n        description\n        price_in_cents\n        image_url\n    }\n  }\n"];
+export function graphql(source: "\n  query Product($id: ID!){\n    Product(id: $id){\n        id\n        name\n        category\n        description\n        price_in_cents\n        image_url\n        sales\n    }\n  }\n"): (typeof documents)["\n  query Product($id: ID!){\n    Product(id: $id){\n        id\n        name\n        category\n        description\n        price_in_cents\n        image_url\n        sales\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

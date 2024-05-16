@@ -7,9 +7,11 @@ import Link from "next/link";
 import { CartButton, ProductContainer, ProductDescription } from "./styles";
 import Image from "next/image";
 import { formatCents } from "@/utils/CurrencyFormatter";
+import { useCart } from "@/hooks/useCart";
 
 
-export const ProductLayout = ({productId}: {productId: string}) => {  
+export const ProductLayout = ({productId}: {productId: string}) => { 
+  const { addToCart } = useCart(); 
   const { data } = useSuspenseQuery({
     queryKey: ['products'],
     queryFn: async () =>
@@ -20,7 +22,7 @@ export const ProductLayout = ({productId}: {productId: string}) => {
   });
 
  const product = data.Product;
- console.log(product);
+  console.log(product);
  if(!product){
    return <h1>No product find with this id</h1>
  }
@@ -41,7 +43,7 @@ export const ProductLayout = ({productId}: {productId: string}) => {
         <span className="info">*Frete de R$40,00 para todo o Brasil. Grátis para compras acima de R$900,00.</span>
         <h2 className="description_title">Descrição</h2>
         <p className="description_content">{product.description}</p>
-        <CartButton><ShoppingBag /><span>ADICIONAR AO CARRINHO</span></CartButton>
+        <CartButton onClick={() => addToCart(product, 1)}><ShoppingBag /><span>ADICIONAR AO CARRINHO</span></CartButton>        
       </div>
     </ProductDescription>
   </ProductContainer>

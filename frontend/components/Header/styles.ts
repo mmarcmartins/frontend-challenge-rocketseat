@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link';
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
@@ -73,10 +74,11 @@ export const Header = styled.header`
 `;
 
 
-export const MainHeader = styled.h1`
+export const MainHeader = styled(Link)`
   color: #5D5D6D;
   font-family: var(--font-title);
   font-size: 40px;
   font-style: normal;
   font-weight: 400;
+  text-decoration: none;
 `;

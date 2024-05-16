@@ -7,6 +7,7 @@ export type Product = {
   price_in_cents: number;
   sales: number;
   __typename?: "Product";
+  quantity?: number;
 }
 
 export type SmallProduct = Omit<Product, 'description'>;
