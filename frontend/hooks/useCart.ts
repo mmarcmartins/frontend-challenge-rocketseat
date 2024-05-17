@@ -66,6 +66,7 @@ export const useCart =  () => {
     }
 
     return {
+        getSafeCart,
         addQuantity,
         removeQuantity,
         removeFromCart,

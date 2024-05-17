@@ -18,8 +18,7 @@ export default async function HydratedProduct({productId, children}: HydratedPro
         getProduct,        
         {id: productId},
       ),
-  })  
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  })    
   const dehydratedState = dehydrate(queryClient); 
   return (
     <HydrationBoundary state={dehydratedState}>       

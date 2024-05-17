@@ -9,11 +9,10 @@ import Image from "next/image";
 import { formatCents } from "@/utils/CurrencyFormatter";
 import { useCart } from "@/hooks/useCart";
 
-
 export const ProductLayout = ({productId}: {productId: string}) => { 
   const { addToCart } = useCart(); 
   const { data } = useSuspenseQuery({
-    queryKey: ['products'],
+    queryKey: ['product', productId],
     queryFn: async () =>
     GraphQLClient.request(        
         getProduct,
@@ -22,7 +21,7 @@ export const ProductLayout = ({productId}: {productId: string}) => {
   });
 
  const product = data.Product;
-  console.log(product);
+  
  if(!product){
    return <h1>No product find with this id</h1>
  }
