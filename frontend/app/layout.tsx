@@ -4,7 +4,7 @@ import Providers from '@/utils/provider';
 import type { Metadata } from 'next'
 import { Saira, Saira_Stencil_One } from 'next/font/google'
 
-const SairaFont = Saira({ subsets: ['latin'] })
+const SairaFont = Saira({ subsets: ['latin'], variable: '--font-content' })
 const SairaStencilOne = Saira_Stencil_One({ subsets: ['latin'] , weight: '400', variable: '--font-title' });
 
 export const metadata: Metadata = {

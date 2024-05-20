@@ -4,6 +4,8 @@
 // We can not useState or useRef in a server component, which is why we are
 // extracting this part out into it's own file with 'use client' on top
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { CartProvider } from './CartProvider'
+import { PropsWithChildren } from 'react'
 
 function makeQueryClient() {
   return new QueryClient({
@@ -33,7 +35,7 @@ function getQueryClient() {
   }
 }
 
-export default function Providers({ children }) {
+export default function Providers({ children }: PropsWithChildren) {
   // NOTE: Avoid useState when initializing the query client if you don't
   //       have a suspense boundary between this and the code that may
   //       suspend because React will throw away the client on the initial
@@ -41,6 +43,11 @@ export default function Providers({ children }) {
   const queryClient = getQueryClient()
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
+        {children}
+      </CartProvider>
+    </QueryClientProvider>
   )
 }
