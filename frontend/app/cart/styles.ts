@@ -53,6 +53,9 @@ export const CartList = styled.ul`
   margin-top: 15px;
   gap: 30px;
   display: flex;
+  padding-right: 10px;
+  overflow: scroll;
+  max-height: 680px;
   flex-direction: column;
 `;
 
@@ -60,11 +63,11 @@ export const CartCheckout = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #FFF;
-  margin-left: 32px;  
-  height: calc(100vh - 120px);
+  margin-left: 32px;    
   padding: 30px;
   flex-basis: 352px;
   box-sizing: border-box;
+  min-height: calc(100vh - 215px);
   .checkout_prices {
     
     hr{

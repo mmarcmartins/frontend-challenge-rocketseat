@@ -4,8 +4,7 @@ export const Card = styled.li`
     display: flex;
     background-color: #FFF;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
-    border-radius: 5px;
-    min-height: 211px;
+    border-radius: 5px;    
     box-sizing: border-box;
     align-items: stretch;
     .info {
