@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header';
+import { Snackbar } from '@/components/Snackbar';
 import StyledComponentsRegistry from '@/lib/registry'
 import Providers from '@/utils/provider';
 import type { Metadata } from 'next'
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body style={{margin: 0, backgroundColor: '#F0F0F5'}} suppressHydrationWarning={true} className={`${SairaStencilOne.variable} ${SairaFont.className}`}>
-        <Providers>
+        <Providers>          
           <StyledComponentsRegistry>
           <Header/>
           {children}

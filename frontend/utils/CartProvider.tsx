@@ -8,70 +8,119 @@ import { PropsWithChildren } from "react";
 
 export type CartProviderReturn = {
     products: Product[];
-    addQuantity: (productId: string, quantity: number) => string;
-    removeQuantity: (productId: string, quantity: number) => string;
-    removeFromCart: (product: Product) => void;
-    addToCart: (product: Product, quantity: number) => void;
+    addQuantity: (productId: string, quantity: number) => ResponseDetail;
+    removeQuantity: (productId: string, quantity: number) => ResponseDetail;
+    removeFromCart: (product: Product) => ResponseDetail;
+    addToCart: (product: Product, quantity: number) => ResponseDetail;
     quantityItemsOnCart: number;
 }
 
+type ResponseDetail = {
+    success: boolean;
+    detail: string;
+}
 
 export const CartContext = createContext({} as CartProviderReturn);
 
 export const CartProvider = ({children} : PropsWithChildren) => {
     const [cartProducts, setCartProducts] = useState(() => {
+        if (typeof localStorage !== 'undefined') {
         const storage = localStorage.getItem(LOCAL_STORAGE_KEY);        
-        if(storage){
-            return JSON.parse(storage) as Product[]
+            if(storage){
+                return JSON.parse(storage) as Product[]
+            }
         }
         return [];
     });
         
-    const addToCart = (product: Product, quantity: number) => {        
+    const addToCart = (product: Product, quantity: number) : ResponseDetail => {        
         const curr = cartProducts?.find(currProduct => currProduct.id === product.id); 
         if(curr){
             return addQuantity(curr.id, 1);
         }
-        const newCart = [
-            ...cartProducts,
-            {...product,
-            quantity }
-        ];
-        setCartProducts(newCart)
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newCart))
+        try {
+            const newCart = [
+                ...cartProducts,
+                {...product,
+                quantity }
+            ];
+            setCartProducts(newCart)
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newCart))
+            return {
+                detail: "Produto adicionado no carrinho !",
+                success: true,
+            };
+        } catch (e) {            
+            console.warn("Add to cart did not work properly", e);
+            return {
+                detail: "Não foi possivel adicionar produto no carrinho :(",
+                success: false,
+            };
+        }
     }
 
     const replaceCart = (products: Product[]) => {
-        setCartProducts(products);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([
-            ...products
-        ]))
+        try{
+            setCartProducts(products);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([
+                ...products
+            ]))
+        } catch (e) {
+            console.warn('Replace cart did not work',e);
+        }
     }
 
-    const removeFromCart = (product: Product) => {        
-        if(!cartProducts) return console.warn('no items found on cart');
-        const newItems = cartProducts.filter((currProduct) => currProduct.id !== product.id);
-        replaceCart(newItems);
+    const removeFromCart = (product: Product) : ResponseDetail => {        
+        if(!cartProducts) {
+            console.warn('no items found on cart');            
+            return {
+                detail: "Não foi possivel remover produto do carrinho",
+                success: false,
+            };
+        }
+        try {
+
+            const newItems = cartProducts.filter((currProduct) => currProduct.id !== product.id);
+            replaceCart(newItems);        
+            return {
+                detail: "Produto removido do carrinho",
+                success: true,
+            };
+        } catch (e) {
+            console.warn("Remove from cart did not work properly", e);
+            return {
+                detail: "Não foi possivel remover produto do carrinho",
+                success: false,
+            };   
+        }        
     }
 
-    const addQuantity = (productId: string, quantity: number): string => {
+    const addQuantity = (productId: string, quantity: number): ResponseDetail => {
         return modifyCart(productId, quantity)
     }
 
-    const removeQuantity = (productId: string, quantity:number): string => {
+    const removeQuantity = (productId: string, quantity:number): ResponseDetail => {
         return modifyCart(productId, quantity * - 1)
     }
 
-    const modifyCart = (productId: string, quantity: number) => {        
+    const modifyCart = (productId: string, quantity: number) : ResponseDetail => {        
         const curr = cartProducts.find(product => product.id === productId);
-        if(!curr) return console.warn('Product does not exists on cart');
+        if(!curr) {
+            console.warn('Product does not exists on cart');   
+            return {
+                detail: "Produto não existe no carrinho !",
+                success: false,
+            };
+        }
         const newQuantity = Number(curr.quantity) + quantity;        
         if(Number(curr.quantity) + quantity <=0 ){
-           removeFromCart(curr);
-           return "Produto removido do carrinho";
+           return removeFromCart(curr);           
         }        
         if(newQuantity > 10){
-            return "Não é possivel aumentar a quantidade desse produto no carrinho"
+            return {
+                detail: "Não é possivel adicionar mais quantidade desse produto no carrinho!",
+                success: false,
+            };
         }        
         replaceCart(cartProducts.map((p) => {
             if(p.id === curr.id){
@@ -79,7 +128,10 @@ export const CartProvider = ({children} : PropsWithChildren) => {
             }
             return p
         }));
-        return "Produto atualizado";
+        return {
+            detail: "Produto atualizado!",
+            success: true,
+        };
     }
     
     const quantityItemsOnCart = cartProducts.reduce((prev,next) => Number(next.quantity) + prev, 0)
@@ -99,4 +151,4 @@ export const CartProvider = ({children} : PropsWithChildren) => {
 
 export function useCart() {
     return useContext(CartContext);
-  }
+}

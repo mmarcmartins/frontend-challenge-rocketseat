@@ -8,9 +8,13 @@ import { CartButton, ProductContainer, ProductDescription } from "./styles";
 import Image from "next/image";
 import { formatCents } from "@/utils/CurrencyFormatter";
 import { useCart } from '@/utils/CartProvider';
+import { Product } from "@/types";
+import { useSnackbar } from "../Snackbar/useSnackbar";
+import { useThrottle } from "@/hooks/useThrottle";
 
 export const ProductLayout = ({productId}: {productId: string}) => { 
   const { addToCart } = useCart(); 
+  const { openSnackbar } = useSnackbar();
   const { data } = useSuspenseQuery({
     queryKey: ['product', productId],
     queryFn: async () =>
@@ -21,7 +25,14 @@ export const ProductLayout = ({productId}: {productId: string}) => {
   });
 
  const product = data.Product;
-  
+
+ const onAddToCart = (product: Product) => {
+   const {detail, success} = addToCart(product, 1);
+   openSnackbar({message : detail, variant: success ? "SUCCESS" : "ERROR"});
+ }
+
+ const debouncedCart = useThrottle(onAddToCart);
+
  if(!product){
    return <h1>No product find with this id</h1>
  }
@@ -42,7 +53,7 @@ export const ProductLayout = ({productId}: {productId: string}) => {
         <span className="info">*Frete de R$40,00 para todo o Brasil. Grátis para compras acima de R$900,00.</span>
         <h2 className="description_title">Descrição</h2>
         <p className="description_content">{product.description}</p>
-        <CartButton onClick={() => addToCart(product, 1)}><ShoppingBag /><span>ADICIONAR AO CARRINHO</span></CartButton>        
+        <CartButton onClick={() => debouncedCart(product)}><ShoppingBag /><span>ADICIONAR AO CARRINHO</span></CartButton>        
       </div>
     </ProductDescription>
   </ProductContainer>
