@@ -1,5 +1,4 @@
 'use client'
-
 import getAllProducts from "@/queries/getAllProducts";
 import { ListProductsStyles } from "./styles";
 import { SmallCardProduct } from "../CardProduct/SmallCardProduct";
@@ -13,9 +12,10 @@ import { paramsToQuery } from "@/utils/mountParamsToQuery";
 export const ListProducts = () => {
   const searchParams = useSearchParams();
   const params = paramsToQuery(searchParams);
-
+  const suspenseKey = JSON.stringify(params);
+  
   const { data } = useSuspenseQuery({
-    queryKey: ['products'],
+    queryKey: ['products', suspenseKey],
     queryFn: async () =>
     GraphQLClient.request(        
         getAllProducts,
@@ -24,6 +24,10 @@ export const ListProducts = () => {
   });
 
   const products = data.allProducts;
+
+  if(products?.length === 0){
+    return <h1>Nenhum produto foi encontrado com esse filtro :(</h1>
+  }
 
   return(
       <ListProductsStyles>

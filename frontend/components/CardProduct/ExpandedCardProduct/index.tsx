@@ -3,12 +3,13 @@ import { Card } from "./style";
 import Image from "next/image";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { formatCents } from "@/utils/CurrencyFormatter";
-import { CartProviderReturn } from "@/utils/CartProvider";
 
 type ExpandedCardProductProps = {
     product: Product
-    
-} & Pick<CartProviderReturn, 'addQuantity' | 'removeQuantity' | 'removeFromCart'>; 
+    addQuantity: (productId: string, quantity: number) => void;
+    removeQuantity: (productId: string, quantity: number) => void;
+    removeFromCart: (product: Product) => void;
+}; 
 
 export const ExpandedCardProduct = ({product, removeQuantity, addQuantity, removeFromCart}: ExpandedCardProductProps) => {    
     return (

@@ -10,7 +10,7 @@ export const FilterByType = () => {
   const manageCategoryLink = (category?: string) => {        
     if(!category){
       if(params.get("category"))
-      params.delete("category");      
+      params.delete("category");     
     } else{      
       params.set('category', category);
     }    

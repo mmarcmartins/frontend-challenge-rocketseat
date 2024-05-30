@@ -4,21 +4,7 @@ import { createContext, useContext, useState } from "react";
 
 const LOCAL_STORAGE_KEY = "CAPPUTEENO_CART";
 import { PropsWithChildren } from "react";
-
-
-export type CartProviderReturn = {
-    products: Product[];
-    addQuantity: (productId: string, quantity: number) => ResponseDetail;
-    removeQuantity: (productId: string, quantity: number) => ResponseDetail;
-    removeFromCart: (product: Product) => ResponseDetail;
-    addToCart: (product: Product, quantity: number) => ResponseDetail;
-    quantityItemsOnCart: number;
-}
-
-type ResponseDetail = {
-    success: boolean;
-    detail: string;
-}
+import { CartProviderReturn, ResponseDetail } from "./types";
 
 export const CartContext = createContext({} as CartProviderReturn);
 

@@ -7,10 +7,11 @@ import Link from "next/link";
 import { CartButton, ProductContainer, ProductDescription } from "./styles";
 import Image from "next/image";
 import { formatCents } from "@/utils/CurrencyFormatter";
-import { useCart } from '@/utils/CartProvider';
+
 import { Product } from "@/types";
 import { useSnackbar } from "../Snackbar/useSnackbar";
 import { useThrottle } from "@/hooks/useThrottle";
+import { useCart } from "@/utils/CartProvider";
 
 export const ProductLayout = ({productId}: {productId: string}) => { 
   const { addToCart } = useCart(); 

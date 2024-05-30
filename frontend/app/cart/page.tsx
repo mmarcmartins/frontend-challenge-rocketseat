@@ -3,12 +3,17 @@
 import Link from "next/link";
 import { CartCheckout, CartContainer, CartDetails, CartFlex, CartList, PaymentButton } from "./styles";
 import { Undo2 } from "lucide-react";
-import { useCart } from '@/utils/CartProvider';
+
 import { formatCents } from "@/utils/CurrencyFormatter";
 import { ExpandedCardProduct } from "@/components/CardProduct/ExpandedCardProduct";
+import { useCart } from "@/utils/CartProvider";
+import { ResponseDetail } from "@/utils/CartProvider/types";
+import { useSnackbar } from "@/components/Snackbar/useSnackbar";
+import { Product } from "@/types";
 
 export default function Page(){
     const { products, addQuantity, removeQuantity, quantityItemsOnCart ,removeFromCart} = useCart();  
+    const {openSnackbar} = useSnackbar();
     
     const totalCartValue = products.reduce((prev,next) => next.price_in_cents * Number(next.quantity) + prev, 0);    
     const totalCartValueFormatted = formatCents(totalCartValue);
@@ -19,7 +24,11 @@ export default function Page(){
         if(quantityItemsOnCart === 0) return <span className="cart_total">Não há produtos no carrinho</span>
         if(quantityItemsOnCart === 1) return <span className="cart_total">Total (1 Produto) <strong>{totalCartValueFormatted}</strong></span>
         return <span className="cart_total">Total ({quantityItemsOnCart} Produtos) <strong>{totalCartValueFormatted}</strong></span>
-    }   
+    }       
+    
+    const handleCartAction = ({detail, success}: ResponseDetail) => {
+        openSnackbar({message: detail, variant: success ? "SUCCESS" : "ERROR"})
+    }
 
     return(
     <CartContainer as="section">
@@ -37,9 +46,9 @@ export default function Page(){
                     <CartList>
                         {products.map(product => (
                             <ExpandedCardProduct 
-                            addQuantity={addQuantity} 
-                            removeFromCart={removeFromCart} 
-                            removeQuantity={removeQuantity} 
+                            addQuantity={(productId: string, quantity: number) => addQuantity(productId,quantity)} 
+                            removeFromCart={(product: Product) => handleCartAction(removeFromCart(product))} 
+                            removeQuantity={(productId: string, quantity: number) => removeQuantity(productId, quantity)}                             
                             key={product.id} 
                             product={product}/>
                         ))}

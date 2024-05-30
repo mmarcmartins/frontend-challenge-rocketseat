@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { CartProvider } from './CartProvider'
 import { PropsWithChildren } from 'react'
 import { Snackbar } from '@/components/Snackbar'
+import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
 
 function makeQueryClient() {
   return new QueryClient({
@@ -46,11 +47,13 @@ export default function Providers({ children }: PropsWithChildren) {
   return (
     
     <QueryClientProvider client={queryClient}>
+      <ReactQueryStreamedHydration>
       <CartProvider>
         <Snackbar>
           {children}
         </Snackbar>
       </CartProvider>
+      </ReactQueryStreamedHydration>
     </QueryClientProvider>
   )
 }

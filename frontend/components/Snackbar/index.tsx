@@ -16,7 +16,7 @@ type SnackbarProps = {
 
 type SnackBarContextReturn = {    
     timeout: number;
-    openSnackbar: ({message, timeout}: SnackbarProps) => void;
+    openSnackbar: ({message, timeout, variant}: SnackbarProps) => void;
 };
 
 

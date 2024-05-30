@@ -5,12 +5,23 @@ export const paramsToQuery = (params : ReadonlyURLSearchParams) => {
     const currentOrder = params.get('sort');
     const currentField = params.get('field');
     const currentCategory = params.get('category');
+    const currentTerm = params.get('term');
+
+    const filter: Record<string,string> = {};   
+
+    if(currentCategory){
+        filter["category"] = currentCategory;
+    }
+
+    if(currentTerm){
+        filter["q"] = currentTerm;
+    }
 
     return {
         page: currentPage,
         ...(currentOrder && {sortOrder: currentOrder}),
         ...(currentField && {sortField: currentField}),
-        ...(currentCategory && {filter: { category: currentCategory}}),        
+        ...((filter?.category || filter?.q) && {filter}),        
     }
 }
 
@@ -19,17 +30,26 @@ type PropsToQueryParams = {
     field?: string,
     category?: string;
     page: number
+    term?: string;
 };
-
+  
 export const propsToQuery = ({
     sort,
     field,
     page,
-    category
+    category,
+    term
 }:PropsToQueryParams) => {
+    const filter: Record<string,string> = {};   
+    if(category){
+        filter["category"] = category;
+    }
+    if(term){
+        filter["q"] = term;
+    }    
     return {
         page,
-        ...(category && {filter: {category}}),
+        ...((filter?.category || filter?.q) && {filter}),
         ...(sort && {sortOrder: sort}),
         ...(field && {sortField: field}),
     }

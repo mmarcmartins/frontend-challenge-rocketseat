@@ -13,19 +13,31 @@ export default async function Page({
     field?: string;
     page?: string;
     category?: string;
+    term?: string;
   };
 }) {
+
   const currentPage = Number(searchParams?.page) || 0;
   const currentOrder = searchParams?.sort;
   const currentField = searchParams?.field;
-  const currentCategory = searchParams?.field;
+  const currentCategory = searchParams?.category;
+  const currentTerm = searchParams?.term;
 
+  const suspenseKey = JSON.stringify(searchParams);
+  
   return (
     <HomePage>      
       <Container>
         <FilterProducts/>
-        <Suspense fallback={<ListProductsLoader/>}>
-          <HydratedProducts currentField={currentField} currentCategory={currentCategory} currentOrder={currentOrder} currentPage={currentPage}/>
+        <Suspense key={suspenseKey} fallback={<ListProductsLoader/>}>
+          <HydratedProducts
+            queryKey={suspenseKey} 
+            currentTerm={currentTerm} 
+            currentField={currentField} 
+            currentCategory={currentCategory} 
+            currentOrder={currentOrder} 
+            currentPage={currentPage}
+          />
         </Suspense>
       </Container>
     </HomePage>
