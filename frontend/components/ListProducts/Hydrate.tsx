@@ -2,8 +2,10 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { ListProducts } from '.';
 import getAllProducts from '@/queries/getAllProducts';
 import { GraphQLClient } from '@/client/Graphql';
-import getQueryClient from '@/utils/getQueryClient';
+
 import { propsToQuery } from '@/utils/mountParamsToQuery';
+import getQueryClient from '@/utils/getQueryClient';
+
 
 type HydratedProductsProps = {
   currentPage:number;

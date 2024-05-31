@@ -1,3 +1,4 @@
+
 import { Product } from "@/types";
 import { Card } from "./style";
 import Image from "next/image";

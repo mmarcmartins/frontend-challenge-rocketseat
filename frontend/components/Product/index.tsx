@@ -9,7 +9,7 @@ import Image from "next/image";
 import { formatCents } from "@/utils/CurrencyFormatter";
 
 import { Product } from "@/types";
-import { useSnackbar } from "../Snackbar/useSnackbar";
+import { useSnackbar } from "../../hooks/useSnackbar";
 import { useThrottle } from "@/hooks/useThrottle";
 import { useCart } from "@/utils/CartProvider";
 

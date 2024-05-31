@@ -1,3 +1,4 @@
+"use server"
 import { HeaderContainer, MainHeader, Header as StyledHeader } from './styles';
 import Container from '../Container';
 

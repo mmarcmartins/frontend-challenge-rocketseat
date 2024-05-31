@@ -1,15 +1,17 @@
 'use client'
 
 import Link from "next/link";
-import { CartCheckout, CartContainer, CartDetails, CartFlex, CartList, PaymentButton } from "./styles";
+import { CartContainer, CartDetails, CartFlex, CartList } from "./styles";
 import { Undo2 } from "lucide-react";
 
 import { formatCents } from "@/utils/CurrencyFormatter";
 import { ExpandedCardProduct } from "@/components/CardProduct/ExpandedCardProduct";
 import { useCart } from "@/utils/CartProvider";
 import { ResponseDetail } from "@/utils/CartProvider/types";
-import { useSnackbar } from "@/components/Snackbar/useSnackbar";
+
 import { Product } from "@/types";
+import { useSnackbar } from "@/hooks/useSnackbar";
+import { CheckoutDetails } from "@/components/CheckoutDetails";
 
 export default function Page(){
     const { products, addQuantity, removeQuantity, quantityItemsOnCart ,removeFromCart} = useCart();  
@@ -17,8 +19,6 @@ export default function Page(){
     
     const totalCartValue = products.reduce((prev,next) => next.price_in_cents * Number(next.quantity) + prev, 0);    
     const totalCartValueFormatted = formatCents(totalCartValue);
-    
-    const totalPurchase = formatCents(Number(totalCartValue) > 90000 ? totalCartValue : Number(totalCartValue) + 4000);
     
     const getCartDescription = () => {
         if(quantityItemsOnCart === 0) return <span className="cart_total">Não há produtos no carrinho</span>
@@ -56,28 +56,10 @@ export default function Page(){
                 )}
             </CartDetails>
             {totalCartValue > 0 && (
-            <CartCheckout>
-                <h3>RESUMO DO SEU PEDIDO</h3>
-                <div className="checkout_prices">
-                    <div className="checkout_prices__value">
-                        <span>Subtotal de produtos</span>
-                        <span>{totalCartValueFormatted}</span>
-                    </div>
-                    <div className="checkout_prices__value">
-                        <span>Entrega</span>
-                        {totalCartValue > 90000 ? (<span>R$ 0,00</span>) : (<span>R$ 40,00</span>)}
-                    </div>
-                    <hr/>
-                    <div className="checkout_prices__value">
-                        <span><strong>Total</strong></span>
-                        <span><strong>{totalPurchase}</strong></span>
-                    </div>
-                    <PaymentButton>
-                        Finalizar a compra
-                    </PaymentButton>
-                </div>
-            </CartCheckout>
-        )}
+                <CheckoutDetails 
+                totalCartValueFormatted={totalCartValueFormatted} 
+                totalCartValue={totalCartValue} />
+            )}
         </CartFlex>
     </CartContainer>
     );

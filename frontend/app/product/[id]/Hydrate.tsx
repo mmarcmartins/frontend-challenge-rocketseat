@@ -1,9 +1,11 @@
 
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { GraphQLClient } from '@/client/Graphql';
-import getQueryClient from '@/utils/getQueryClient';
+
 import { PropsWithChildren } from 'react';
 import getProduct from '@/queries/getProduct';
+import getQueryClient from '@/utils/getQueryClient';
+
 
 type HydratedProductProps = {
   productId: string;

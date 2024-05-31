@@ -4,7 +4,8 @@ import styled, { keyframes } from "styled-components";
 import { VARIANT } from ".";
 
 const breatheAnimation = keyframes`
- 0% { right: 0 } 
+ 0% { right: -100% } 
+ 10% { right: 0 } 
  50% { right: 0 }
  100% { right: -100%; } 
 `

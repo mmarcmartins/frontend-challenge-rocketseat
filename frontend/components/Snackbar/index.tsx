@@ -53,8 +53,6 @@ export const Snackbar = ({children}: PropsWithChildren) => {
         clearTimeout(timeoutId);
     }
 
-    
-
     return (        
         <SnackbarContext.Provider value={{
             openSnackbar,

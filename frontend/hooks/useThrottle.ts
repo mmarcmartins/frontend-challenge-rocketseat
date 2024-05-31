@@ -1,5 +1,6 @@
-import { useSnackbar } from '@/components/Snackbar/useSnackbar';
+
 import { useEffect, useCallback, useRef } from 'react';
+import { useSnackbar } from './useSnackbar';
 
 export const useThrottle = <T extends (...args: any[]) => void>(callback: T, rcDelay?: number): ((...args: Parameters<T>) => void) => {
   const callbackRef = useRef(callback);
