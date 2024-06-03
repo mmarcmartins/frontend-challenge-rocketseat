@@ -1,7 +1,7 @@
 import { Header } from '@/components/Header';
-import { Snackbar } from '@/components/Snackbar';
 import StyledComponentsRegistry from '@/lib/registry'
-import Providers from '@/utils/provider';
+import Providers from '@/providers/ApplicationProvider';
+
 import type { Metadata } from 'next'
 import { Saira, Saira_Stencil_One } from 'next/font/google'
 

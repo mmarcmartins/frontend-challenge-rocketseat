@@ -6,7 +6,7 @@
 import dynamic from 'next/dynamic';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { CartProvider } from '../providers/CartProvider'
+import { CartProvider } from './CartProvider'
 import { PropsWithChildren } from 'react'
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
 
@@ -50,7 +50,6 @@ export default function Providers({ children }: PropsWithChildren) {
   const queryClient = getQueryClient()
 
   return (
-    
     <QueryClientProvider client={queryClient}>
       <ReactQueryStreamedHydration>
       <CartProvider>
