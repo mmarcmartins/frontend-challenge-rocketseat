@@ -18,21 +18,12 @@ O desafio será implementar um e-commerce para venda de canecas e camisetas que 
 - [x] Responsividade
 - [x] Finalizar compra
 
-## 📋 Instruções
-- Siga [esse protótipo](https://www.figma.com/file/rET9F2CeUEJdiVN7JRu993/E-commerce---capputeeno?node-id=680%3A6449)
-- Utilize Next.js e Typescript
-- Faça a estilização com styled-components
-- Utilize o local storage para gerenciar o carrinho
-- Por favor, inclua no README as instruções de instalação do projeto
-- Sinta-se livre para incluir quaisquer observações
-- Consuma nossa **API GraphQL** rodando o comando `yarn start` na pasta `api`
-
-## 😎 Seria legal
-- Fazer deploy na vercel ou em outro local de sua preferência e disponibilizar um link de visualização, se necessário utilize esse servidor para a API GraphQL:  https://rocketseat-frontend-challenge.herokuapp.com/
-- Testes unitários
-- Utilização de cache do Next.js
+## 📋 Todo
+- [ ] Página 404
+- [ ] Tratar possiveis erros de request
 
 ## 😎 Resultados
+- Você pode acessar o resultado neste link: https://frontend-challenge-rocketseat.vercel.app/
 ![alt text](docs/images/homepage.png)
 ![alt text](docs/images/checkout.png)
 ![alt text](docs/images/checkout_responsive.png)
