@@ -6,6 +6,13 @@ export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media (max-width: 767px) { 
+    justify-content: center;
+    align-items: center;    
+    flex-direction: column-reverse;
+    gap: 30px;
+    margin-bottom: 30px;
+   }
 `;
 
 export const MenuFilterButton = styled.button<{ $isMenuActive: boolean }>`
@@ -44,10 +51,20 @@ export const ListContainer = styled.div`
   border-radius: 4px;
   padding: 12px 16px;
   box-sizing: border-box;
+  @media (max-width: 767px) { 
+    width: 100%;
+    top: initial;
+    bottom: -130%;
+  }
   ul { 
     list-style: none;
     margin: 0;
     padding: 0;
+    @media (max-width: 767px) { 
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+     }
   }
   li {
     &:not(:last-child){

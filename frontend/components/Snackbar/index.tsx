@@ -1,9 +1,8 @@
 'use client'
 
-import { PropsWithChildren, createContext, useEffect, useState } from "react";
+import { PropsWithChildren, createContext, useState } from "react";
 import { createPortal } from "react-dom"
 import { SnackBarStyled } from "./style";
-import { useMounted } from "@/hooks/useMounted";
 
 export const DEFAULT_DURATION = 3000;
 export type VARIANT = "SUCCESS" | "ERROR";
@@ -23,13 +22,12 @@ type SnackBarContextReturn = {
 export const SnackbarContext = createContext({} as SnackBarContextReturn);
 
 export const Snackbar = ({children}: PropsWithChildren) => {
-    const mounted = useMounted();
     const [opened, setIsOpened] = useState(false);
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
     const [timeout, setInnerTimeout] = useState<number>(0);
     const [variant, setVariant] = useState<VARIANT>("SUCCESS");
     const [message, setMessage] = useState('') 
-    if (!mounted) return null   
+    
     
     const openSnackbar = ({message, timeout, variant = "SUCCESS"}:SnackbarProps) => {        
         if(!opened){            
@@ -69,3 +67,4 @@ export const Snackbar = ({children}: PropsWithChildren) => {
         </SnackbarContext.Provider>        
     )
 }
+export default Snackbar;

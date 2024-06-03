@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
-import { HyperLink } from "./styles"
+import { HyperLink, Nav } from "./styles"
 
 export const FilterByType = () => {
   const searchParams = useSearchParams();  
@@ -24,7 +24,7 @@ export const FilterByType = () => {
   const isAllActive = !params.get("category");
   
   return(
-      <nav>
+      <Nav>
         <HyperLink $active={isAllActive} href={manageCategoryLink()}>
           Todos os produtos
         </HyperLink>
@@ -34,6 +34,6 @@ export const FilterByType = () => {
         <HyperLink $active={isMugActive} href={manageCategoryLink("mugs")}>
           Canecas
         </HyperLink>
-      </nav>          
+      </Nav>          
   );
 };

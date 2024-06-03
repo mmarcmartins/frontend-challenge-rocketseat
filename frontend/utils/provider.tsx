@@ -3,11 +3,16 @@
 
 // We can not useState or useRef in a server component, which is why we are
 // extracting this part out into it's own file with 'use client' on top
+import dynamic from 'next/dynamic';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { CartProvider } from './CartProvider'
 import { PropsWithChildren } from 'react'
-import { Snackbar } from '@/components/Snackbar'
-import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
+import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
+
+const DynamicSnack = dynamic(() => import('@/components/Snackbar'), {
+  ssr: false
+})
 
 function makeQueryClient() {
   return new QueryClient({
@@ -49,9 +54,9 @@ export default function Providers({ children }: PropsWithChildren) {
     <QueryClientProvider client={queryClient}>
       <ReactQueryStreamedHydration>
       <CartProvider>
-        <Snackbar>
+        <DynamicSnack>
           {children}
-        </Snackbar>
+        </DynamicSnack>
       </CartProvider>
       </ReactQueryStreamedHydration>
     </QueryClientProvider>

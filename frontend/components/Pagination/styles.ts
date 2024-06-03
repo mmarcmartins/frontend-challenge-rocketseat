@@ -6,6 +6,9 @@ export const PageContainer = styled.div`
   flex-wrap: nowrap;
   margin-top: 32px;
   gap: 2px;
+  @media (max-width: 767px) {     
+    gap: 10px;
+   }
 `;
 
 export const PageNumber = styled.a<{$active?: boolean}>`

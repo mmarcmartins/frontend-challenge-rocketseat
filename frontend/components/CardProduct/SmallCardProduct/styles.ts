@@ -41,4 +41,10 @@ export const SmallProductStyle = styled.li`
     color: #09090A;
     font-weight: bold;
   }
+  @media (max-width: 767px) { 
+    flex: 0 1 calc(50% - 18px);
+  }
+  @media (max-width: 460px) { 
+    flex: 0 1 100%;
+  }
 `;

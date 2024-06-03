@@ -2,6 +2,14 @@
 
 import styled, { css } from 'styled-components';
 
+export const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  gap: 20px;
+`;
+
+
 const custom = css`
   font-weight: 600;
   &:after{
@@ -37,9 +45,4 @@ export const HyperLink = styled.a<{$active?: boolean}>`
   &:hover{
     ${custom}
   }
-
-  &:not(:last-child) {
-    margin-right: 40px;
-  }
-
 `;

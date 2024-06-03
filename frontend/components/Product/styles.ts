@@ -79,6 +79,9 @@ export const ProductDescription = styled.article`
   .product_image{
     max-width: 50%;
     height: auto;
+    @media (max-width: 767px) { 
+      max-width: 100%;
+     }
   }
   .description {
     display: flex;
@@ -87,6 +90,10 @@ export const ProductDescription = styled.article`
     padding: 0 40px;
     box-sizing: border-box;
     flex-basis: 50%;
+    @media (max-width: 767px) { 
+      flex-basis: auto;
+      padding: 30px 0;
+     }
     .category {
       font-size: 16px;
       line-height: 24px;      

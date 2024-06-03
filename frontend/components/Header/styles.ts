@@ -15,7 +15,10 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-
+  @media (max-width: 767px) { 
+   height: 120px;
+   flex-direction: column;
+  }
   .content {
     display: flex;
     .cart {
@@ -51,7 +54,9 @@ export const Header = styled.header`
     position:relative;
     justify-content: center;
     align-items: stretch;
-
+    @media (max-width: 767px) { 
+      width: 250px;
+    }
     input {      
       width: 100%;
       background-color: #F3F5F6;

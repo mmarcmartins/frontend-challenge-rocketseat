@@ -5,7 +5,6 @@ import Container from '../Container';
 import { Bag } from './Bag';
 import { Search } from './Search';
 
-
 export const Header = () => {
     return(
       <HeaderContainer>        
