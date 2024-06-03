@@ -2,13 +2,15 @@
 
 import { Search  as SearchIcon } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useRef } from "react";
 import { ButtonSearch } from "./style";
+import { useSnackbar } from "@/hooks/useSnackbar";
 
 export const Search = () => {    
     const searchParams = useSearchParams();
     const { push } = useRouter();
-
+    const searchRef = useRef<HTMLInputElement>(null);
+    const { openSnackbar } = useSnackbar();
     const searchProduct = (term: string) => {
         const params = new URLSearchParams(searchParams);
         params.set('term', term);
@@ -22,9 +24,14 @@ export const Search = () => {
     return (
         <form className="search" onSubmit={(event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
-            searchProduct(event.currentTarget.elements.searchProductName.value);
+            const search = searchRef.current?.value;
+            if(search){
+              searchProduct(search);
+              return;
+            }
+            openSnackbar({message: "Valor inválido", variant: "ERROR"});
         }}>        
-            <input type="text" id="searchProductName" name="product-name" placeholder="Procurando por algo específico?"/>
+            <input type="text" ref={searchRef} name="product-name" placeholder="Procurando por algo específico?"/>
             <ButtonSearch type="submit"><SearchIcon /></ButtonSearch>
         </form>
     );
