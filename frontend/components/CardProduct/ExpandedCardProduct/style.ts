@@ -7,6 +7,12 @@ export const Card = styled.li`
     border-radius: 5px;    
     box-sizing: border-box;
     align-items: stretch;
+    @media (max-width: 530px) { 
+        flex-direction: column;
+        img {
+            width: auto;
+        }
+    }
     .info {
         padding: 30px;
         display: flex;

@@ -8,9 +8,13 @@ export const CartCheckout = styled.div`
   padding: 30px;
   flex-basis: 352px;
   box-sizing: border-box;
-  min-height: calc(100vh - 215px);
+  min-height: calc(100vh - 215px);  
+  @media (max-width: 929px) { 
+    flex-basis: 100%;
+    min-height: auto;  
+    margin-left: 0;
+  }
   .checkout_prices {
-    
     hr{
       width: 100%;
     }

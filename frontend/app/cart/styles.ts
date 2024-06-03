@@ -57,10 +57,19 @@ export const CartList = styled.ul`
   overflow: scroll;
   max-height: 680px;
   flex-direction: column;
+  @media (max-width: 929px) { 
+    padding-right: 0;
+    max-height: 100%;
+  }
 `;
 
 export const CartFlex = styled.div`
     display: flex;    
     justify-content: center;
     align-items: stretch;
+    flex-wrap: wrap;
+    @media (max-width: 929px) { 
+      gap: 30px;
+      padding-bottom: 30px;
+    }
 `;
