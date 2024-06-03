@@ -1,6 +1,6 @@
 "use client"
 
-import { useCart } from "@/utils/CartProvider";
+import { useCart } from "@/providers/CartProvider";
 import { ShoppingBag } from "lucide-react"
 
 export const Bag = () => {

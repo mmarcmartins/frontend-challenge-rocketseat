@@ -11,7 +11,7 @@ import { formatCents } from "@/utils/CurrencyFormatter";
 import { Product } from "@/types";
 import { useSnackbar } from "../../hooks/useSnackbar";
 import { useThrottle } from "@/hooks/useThrottle";
-import { useCart } from "@/utils/CartProvider";
+import { useCart } from "@/providers/CartProvider";
 
 export const ProductLayout = ({productId}: {productId: string}) => { 
   const { addToCart } = useCart(); 

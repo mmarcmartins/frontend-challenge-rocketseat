@@ -6,7 +6,7 @@
 import dynamic from 'next/dynamic';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { CartProvider } from './CartProvider'
+import { CartProvider } from '../providers/CartProvider'
 import { PropsWithChildren } from 'react'
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
 

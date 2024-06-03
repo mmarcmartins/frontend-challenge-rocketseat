@@ -6,8 +6,8 @@ import { Undo2 } from "lucide-react";
 
 import { formatCents } from "@/utils/CurrencyFormatter";
 import { ExpandedCardProduct } from "@/components/CardProduct/ExpandedCardProduct";
-import { useCart } from "@/utils/CartProvider";
-import { ResponseDetail } from "@/utils/CartProvider/types";
+import { useCart } from "@/providers/CartProvider";
+import { ResponseDetail } from "@/providers/CartProvider/types";
 
 import { Product } from "@/types";
 import { useSnackbar } from "@/hooks/useSnackbar";
