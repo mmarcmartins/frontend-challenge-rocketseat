@@ -1,3 +1,3 @@
 import { GraphQLClient as GraphQLClientDefault } from "graphql-request";
 
-export const GraphQLClient = new GraphQLClientDefault('http://localhost:3333');
+export const GraphQLClient = new GraphQLClientDefault(process.env.GRAPHQL_HOST!);
