@@ -22,8 +22,12 @@ O desafio será implementar um e-commerce para venda de canecas e camisetas que 
 - [x] Página 404
 - [x] Tratar possiveis erros de request
 - [x] Remover react query
+- [x] Subir servidor standalone
 
 ## 😎 Resultados
+
+Acesse aqui: https://frontend-challenge-rocketseat.vercel.app
+
 ![alt text](docs/images/homepage.png)
 ![alt text](docs/images/checkout.png)
 ![alt text](docs/images/checkout_responsive.png)
