@@ -11,18 +11,7 @@ const config: CodegenConfig = {
       preset: "client",
       plugins: []
     }
-  },
-  config: {
-      // Needed to support the updated React Query 5 API
-      reactQueryVersion: 5,
-      legacyMode: false,
-      exposeFetcher: true,
-      exposeQueryKeys: true,
-      addSuspenseQuery: true,
-      // Allows us to specify a custom fetcher function that will leverage
-      // Next.js caching fetaures within our generated query hooks.
-      fetcher: "./fetcher#fetcher",
-    }
+  }
 };
 
 export default config;
