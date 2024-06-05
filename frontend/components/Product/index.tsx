@@ -1,7 +1,4 @@
 'use client'
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { GraphQLClient } from "@/client/Graphql";
-import getProduct from "@/queries/getProduct";
 import { ShoppingBag, Undo2 } from "lucide-react";
 import Link from "next/link";
 import { CartButton, ProductContainer, ProductDescription } from "./styles";
@@ -13,20 +10,10 @@ import { useSnackbar } from "../../hooks/useSnackbar";
 import { useThrottle } from "@/hooks/useThrottle";
 import { useCart } from "@/providers/CartProvider";
 
-export const ProductLayout = ({productId}: {productId: string}) => { 
+export const ProductLayout = ({product}: {product?: Product}) => { 
   const { addToCart } = useCart(); 
   const { openSnackbar } = useSnackbar();
-  const { data } = useSuspenseQuery({
-    queryKey: ['product', productId],
-    queryFn: async () =>
-    GraphQLClient.request(        
-        getProduct,
-        {id: productId},
-      ),   
-  });
-
- const product = data.Product;
-
+   
  const onAddToCart = (product: Product) => {
    const {detail, success} = addToCart(product, 1);
    openSnackbar({message : detail, variant: success ? "SUCCESS" : "ERROR"});
@@ -35,7 +22,7 @@ export const ProductLayout = ({productId}: {productId: string}) => {
  const debouncedCart = useThrottle(onAddToCart);
 
  if(!product){
-   return <h1>No product find with this id</h1>
+   return <h1>Produto não encontrado 😭</h1>
  }
  return (
   <ProductContainer as="section">

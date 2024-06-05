@@ -1,5 +1,3 @@
-'use client'
-
 import { graphql } from "@/gql";
 export default graphql(`
   query Product($id: ID!){

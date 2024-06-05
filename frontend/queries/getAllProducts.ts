@@ -1,5 +1,3 @@
-'use client'
-
 import { graphql } from "@/gql";
 export default graphql(`
   query allProducts($page: Int!, $sortOrder:String = "asc", $sortField: String = "created_at", $filter: ProductFilter){

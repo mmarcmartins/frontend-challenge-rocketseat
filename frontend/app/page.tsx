@@ -1,9 +1,11 @@
 import Container from "@/components/Container";
 import { HomePage } from "./styles";
 import { FilterProducts } from "@/components/FilterProducts";
-import HydratedProducts from "@/components/ListProducts/Hydrate";
+
 import { Suspense } from "react";
 import { ListProductsLoader } from "@/components/ListProductsLoader";
+import ListProducts from "@/components/ListProducts";
+
 
 export default async function Page({
   searchParams,
@@ -30,8 +32,7 @@ export default async function Page({
       <Container>
         <FilterProducts/>
         <Suspense key={suspenseKey} fallback={<ListProductsLoader/>}>
-          <HydratedProducts
-            queryKey={suspenseKey} 
+          <ListProducts            
             currentTerm={currentTerm} 
             currentField={currentField} 
             currentCategory={currentCategory} 
