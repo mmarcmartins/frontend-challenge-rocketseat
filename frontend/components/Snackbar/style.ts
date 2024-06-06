@@ -11,7 +11,7 @@ const breatheAnimation = keyframes`
 `
 
 export const SnackBarStyled = styled.div<{$animationTime: number, $variant : VARIANT}>`
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 20%;    
     transform: translateY(-20%);
